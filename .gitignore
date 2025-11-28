@@ -1,0 +1,6 @@
+# Ignore the subject PDF
+en.subject.pdf
+
+# Ignore compiled output files
+*.o
+*.out
