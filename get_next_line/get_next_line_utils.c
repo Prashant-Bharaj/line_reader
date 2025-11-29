@@ -79,3 +79,54 @@ char	*ft_strjoin(char *s1, char const *s2)
 	free(s1);
 	return (str);
 }
+
+/* Find existing node for fd or create one and prepend to list */
+t_fdnode *get_fd_node(t_fdnode **head, int fd)
+{
+	t_fdnode *cur;
+
+	if (!head)
+		return (NULL);
+	cur = *head;
+	while (cur)
+	{
+		if (cur->fd == fd)
+			return (cur);
+		cur = cur->next;
+	}
+	cur = malloc(sizeof(t_fdnode));
+	if (!cur)
+		return (NULL);
+	cur->fd = fd;
+	cur->save = NULL;
+	cur->next = *head;
+	*head = cur;
+	return (cur);
+}
+
+void remove_fd_node(t_fdnode **head, int fd)
+{
+	t_fdnode *cur;
+	t_fdnode *prev;
+
+	if (!head || !*head)
+		return;
+	cur = *head;
+	prev = NULL;
+	while (cur)
+	{
+		if (cur->fd == fd)
+		{
+			if (prev)
+				prev->next = cur->next;
+			else
+				*head = cur->next;
+			if (cur->save)
+				free(cur->save);
+			free(cur);
+			return;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
+}

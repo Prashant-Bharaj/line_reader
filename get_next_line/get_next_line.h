@@ -25,4 +25,16 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 
+/* per-fd linked list node used internally by get_next_line */
+typedef struct s_fdnode
+{
+	int             fd;
+	char            *save;
+	struct s_fdnode *next;
+}   t_fdnode;
+
+/* helpers to manage per-fd nodes (implemented in utils) */
+t_fdnode *get_fd_node(t_fdnode **head, int fd);
+void      remove_fd_node(t_fdnode **head, int fd);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: prasingh <prasingh@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:41:28 by prasingh          #+#    #+#             */
-/*   Updated: 2025/11/29 00:52:52 by prasingh         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:00:21 by prasingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,25 @@ static char	*ft_save(char *save)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
-	char		*line;
+	static t_fdnode *head;
+	t_fdnode        *node;
+	char            *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save = ft_read_and_save(fd, save);
-	if (!save)
+	node = get_fd_node(&head, fd);
+	if (!node)
 		return (NULL);
-	line = ft_get_line(save);
-	save = ft_save(save);
+	node->save = ft_read_and_save(fd, node->save);
+	if (!node->save)
+	{
+		/* EOF or error: clean node and return NULL */
+		remove_fd_node(&head, fd);
+		return (NULL);
+	}
+	line = ft_get_line(node->save);
+	node->save = ft_save(node->save);
+	if (!node->save)
+		remove_fd_node(&head, fd);
 	return (line);
 }
