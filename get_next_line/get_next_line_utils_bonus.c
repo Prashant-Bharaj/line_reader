@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prasingh <prasingh@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 23:40:58 by prasingh          #+#    #+#             */
-/*   Updated: 2025/12/06 19:35:54 by prasingh         ###   ########.fr       */
+/*   Created: 2025/11/30 22:05:18 by prasingh          #+#    #+#             */
+/*   Updated: 2025/12/06 19:33:01 by prasingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -53,7 +53,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	if (!s1)
 	{
 		s1 = malloc(1);
-		if (!s1)
+		if (!(s1))
 			return (NULL);
 		s1[0] = '\0';
 	}

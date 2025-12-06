@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prasingh <prasingh@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 23:41:28 by prasingh          #+#    #+#             */
-/*   Updated: 2025/12/06 17:13:28 by prasingh         ###   ########.fr       */
+/*   Created: 2025/11/30 22:04:54 by prasingh          #+#    #+#             */
+/*   Updated: 2025/12/06 16:37:30 by prasingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_read_and_save(int fd, char *save)
 {
