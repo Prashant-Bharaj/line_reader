@@ -6,7 +6,7 @@
 /*   By: prasingh <prasingh@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:41:28 by prasingh          #+#    #+#             */
-/*   Updated: 2025/12/06 17:13:28 by prasingh         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:45:32 by prasingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,23 @@ static char	*ft_read_and_save(int fd, char *save)
 	if (!buffer)
 		return (NULL);
 	read_bytes = 1;
-	while (!ft_strchr(save, '\n') && read_bytes != 0)
+	while ((!save || !ft_strchr(save, '\n')) && read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
+		if (read_bytes < 0)
+			return (free(buffer), free(save), NULL);
 		buffer[read_bytes] = '\0';
 		if (!save)
 		{
 			save = malloc(1);
-			save[0] = '\0';
+			if (save)
+				save[0] = '\0';
+			else
+				return (free(buffer), NULL);
 		}
 		save = ft_strjoin(save, buffer);
 	}
-	free(buffer);
-	return (save);
+	return (free(buffer), save);
 }
 
 static char	*ft_get_line(char *save)
